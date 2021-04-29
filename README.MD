@@ -105,6 +105,9 @@ Now edit the `docker-compose.yml` and edit the respective YAML, eg:
     - BEE_CLEF_SIGNER_ETHEREUM_ADDRESS=0000000000000000000000000000000000000000
 ```
 
+Other per-container things to consider setting: `BEE_NAT_ADDR` for port
+forwarding setups.
+
 Unfortunately there's no automatic provisioning yet to extract the keys from
 clef, this would essentially require a two-pass system to set this up, which
 it's a bit easier at the moment to do manually.

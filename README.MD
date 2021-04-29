@@ -1,6 +1,6 @@
 # Apiarist
 
-For those that have been active in the [Ethereum Swarm](https://swarm.ethereum.org)
+Those that have been active in the [Ethereum Swarm](https://swarm.ethereum.org)
 for a while have come to know the desire to scale their hives 🐝, in effect
 working to perfect the ancient art of bee keeping - to become *the* apiarist.
 

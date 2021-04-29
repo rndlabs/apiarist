@@ -18,7 +18,7 @@ designed with the following intentions:
 ## Data structure design
 
 Everything is designed initially to run from `/hive` with the following file
-structure:
+structure (it is assumed that you mount suitable disk space to `/hive`:
 
 ```
 drwxr-xr-x 39     0     0 4.0K Apr 29 01:15 .
@@ -130,6 +130,7 @@ docker-compose up -d
    chequebook contract, but subsequent nodes would fail with an `Out of Gas`
    error. Only way around this was adding nodes individually which was very
    painful.
+3. For any other faults, please file an [issue](https://github.com/mfw78/apiarist/issues)!
 
 # Donations
 

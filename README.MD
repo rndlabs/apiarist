@@ -112,6 +112,9 @@ it's a bit easier at the moment to do manually.
 ## Operation
 
 Before you start it, **CHECK THE PROBLEMS / FAULTS** in the section below.
+Additionally, before starting, please ensure you fund your ethereum addresses
+beforehand by visiting [#faucet-request](https://discord.gg/N2fR8ceK) and
+sprinkle them beforehand. This will smooth the process.
 
 To start everything:
 

@@ -1,0 +1,91 @@
+Welcome to beeee keeping!
+
+Your hive has been successfully deployed. The details are as follows:
+
+Number of bees:         {{ num_nodes }}
+Grafana metrics:        http://{{ network.host_ip_addr }}:{{ network.grafana_port }}
+Grafana credentials:    admin/foobar
+Goerli Endpoint (HTTP): http://{{ network.host_ip_addr }}:{{ network.geth_http_port }}
+Goerli Endpoint (WS):   ws://{{ network.host_ip_addr }}:{{ network.geth_ws_port }}
+
+
+------------------------------------------------------------------------------
+NODE FUNDING
+------------------------------------------------------------------------------
+
+Now, you need to get your bee's funded, so head to #faucet on Ethereum Swarm's
+discord server, and when you get there...
+
+{% for account in accounts %}
+/faucet sprinkle {{ account.address }}
+{% endfor %}
+
+
+------------------------------------------------------------------------------
+CHECK YOUR NODE IS WORKING / GET LOGS
+------------------------------------------------------------------------------
+
+You've funded your nodes, now you want to check if they're working OK. This 
+means we need to dig into the logs! To do so, you can use these commands for
+the respective nodes.
+
+{% for account in accounts %}
+    docker logs bee-docker_bee-{{ loop.index }}_1
+{% endfor %}
+
+You can use the above command varied slightly to change the container name
+to check on the status of other containers, like geth, etc.
+
+How about checking for the metrics containers? This will show you all your
+containers and how they're doing
+
+    docker ps -a
+
+------------------------------------------------------------------------------
+FIREWALL / ROUTING RULES REQUIRED
+------------------------------------------------------------------------------
+
+Awesome, you've made it this far. One of the problems plaguing the network at
+the moment is "Peer not reachable when attempting to connect". Many, many,
+people about this - the problem is that MOST nodes have failed to configure
+inbound access, so when you try connect to them, YOU CAN'T! 
+
+Now, as an enthusiastic apiarist, we know our honey tastes great, so we best
+share it with the world! If you do NOT have a UPnP router, set the following
+rules to ensure you can get inbound connections.
+
+{% for account in accounts %}
+{% set api_addr = (loop.index0 * 3) + network.base_host_port %}
+{% set p2p_addr = api_addr + 1 %}
+{% set debug_api_addr = p2p_addr + 1 %}
+{% set nat_addr = loop.index0 + network.base_external_port %}
+TCP: {{ network.external_ip_addr }}:{{ nat_addr }} -> {{ network.host_ip_addr }}:{{ p2p_addr }}
+{% endfor %}
+
+Once you've set these port forwarding firewall / routing rules, you can
+monitor your bee's once again using the above docker logs commands and
+monitor for inbound connections. If you've got them, congratulations, you're
+making the Swarm a better place!
+
+
+{% for account in accounts %}
+{% set api_addr = (loop.index0 * 3) + network.base_host_port %}
+{% set p2p_addr = api_addr + 1 %}
+{% set debug_api_addr = p2p_addr + 1 %}
+{% set nat_addr = loop.index0 + network.base_external_port %}
+{% set debug_api_url = "http://localhost:" + debug_api_addr|string %}
+------------------------------------------------------------------------------
+DETAILED INFORMATION: bee-{{ loop.index }}
+------------------------------------------------------------------------------
+
+id:                 bee-{{ loop.index }}
+ethereum address:   {{ account.address }} 
+etherscan:          https://goerli.etherscan.io/address/{{ account.address }}
+debug_api:          {{ debug_api_url }}
+
+sanity checks: 
+* Topology:             curl {{ debug_api_url }}/topology | jq
+* Addresses:            curl {{ debug_api_url }}/addresses | jq
+* Chequebook Address:   curl {{ debug_api_url }}/chequebook/address | jq 
+
+{% endfor %}

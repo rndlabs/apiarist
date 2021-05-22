@@ -2,7 +2,7 @@ init.sh
 docker-compose.yaml
 clef.sh
 .env
-tearsheet.txt
+./tearsheet.txt
 prometheus/prometheus.yml
 .virtualenv
 monBee.sh

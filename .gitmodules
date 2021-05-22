@@ -1,0 +1,6 @@
+[submodule "grafana/provisioning/dashboards/grafana-dashboards"]
+	path = grafana/provisioning/dashboards/grafana-dashboards
+	url = https://github.com/ethersphere/grafana-dashboards
+[submodule "monBee"]
+	path = monBee
+	url = https://github.com/ldeffenb/monBee

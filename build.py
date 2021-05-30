@@ -26,6 +26,8 @@ paths = {
 }
 
 # The clef password - used to encrypt new ethereum accounts.
+# WARNING: THIS MUST BE AT LEAST 10 CHARACTERS LONG.
+#          REFER TO https://geth.ethereum.org/docs/getting-started
 clef = {
     'password': 'passwordhere'
 }

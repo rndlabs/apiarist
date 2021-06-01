@@ -16,7 +16,7 @@ num_nodes = 3
 # Every bee has it's day
 versions = {
     'clef': '0.4.12',
-    'bee': '0.6.1',
+    'bee': '0.6.2',
     'geth': 'v1.10.2'
 }
 
